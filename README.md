@@ -1,4 +1,4 @@
-*Project Report: Digital Forensics Tool*
+# *Project Report: Digital Forensics Tool*
 
 ### *1. Introduction*
 Digital forensic investigations require efficient tools to analyze evidence quickly and accurately. This project aims to develop a *Cyber Triage & Digital Forensics Tool* that automates forensic analysis, threat detection, and report generation. The tool will assist investigators in processing forensic disk images, network packets, integrating ML for anomaly detection.

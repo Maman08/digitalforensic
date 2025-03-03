@@ -283,7 +283,7 @@ def parse_pslist(output):
 
 
 
-memoryfile='./memory.lime'
+memoryfile= "/home/mritunjay/memins/volatility3/memory.lime"
 python_exect="/home/mritunjay/memins/volatility3/venv/bin/python"
 vol_exec="/home/mritunjay/memins/volatility3/vol.py"
 @app.get('/analyze/{command}')
@@ -382,7 +382,7 @@ async def get_ssh_connections():
 # yara 
 
 
-MEMORY_LIME_PATH = "./memory.lime"
+MEMORY_LIME_PATH = "/home/mritunjay/memins/volatility3/memory.lime"
 
 # Path to combined YARA rules
 YARA_RULES_PATH = "/home/mritunjay/rules/combined_rules.yar"
