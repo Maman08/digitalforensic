@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"], 
 )
 PORT = 8004
-INTERFACE='wlp0s20f3'
+INTERFACE=''
 
 my_client=InfluxDBClient(host='localhost',port=8086)
 my_client.switch_database('network_data')
