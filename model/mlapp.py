@@ -6,7 +6,8 @@ import pandas as pd
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend requests
+CORS(app, resources={r"/*": {"origins": "*"}})
+  # Enable CORS for frontend requests
 
 # Load trained ML model and preprocessors
 model = joblib.load("sus.pkl") 
