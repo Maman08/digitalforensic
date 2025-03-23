@@ -32,7 +32,7 @@ def classify_alert(packet_info):
     """Classify the packet for potential security threats"""
     alert = None
     unusual_ports = [23, 445, 3389, 8080]  # Common attack ports
-    external_ips = ["185.", "34.", "169."]  # Example external IP prefixes
+    external_ips = ["185.", "34.", "169."] 
 
     if packet_info["length"] > 1000:
         alert = "large_packet"
@@ -162,7 +162,7 @@ class BlockRequest(BaseModel):
 
 def get_mac_address(ip: str) -> str:
     try:
-        # Run the ARP command to find the MAC address
+        # arp command mac address deta hai
         cmd = f"arp -n {ip}"
         # arp -n | grep 192.168.1.3
         result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
@@ -182,11 +182,11 @@ def get_mac_address(ip: str) -> str:
 def block_ip(request: BlockRequest):
     ip = request.ip
 
-    # Validate IP format (basic check)
+    
     if not ip.count('.') == 3:
         raise HTTPException(status_code=400, detail="Invalid IP address")
 
-    # Get the MAC address of the given IP
+  
     mac = get_mac_address(ip)
     if not mac:
         raise HTTPException(status_code=404, detail=f"MAC address for {ip} not found")
@@ -233,7 +233,7 @@ scan_res={}
 @app.post("/scan/")
 async def scan(request: ScanRequest):
     try:
-        url = request.url  # Extract URL from JSON body
+        url = request.url 
         scan_id = str(time.time())
         scan_res[scan_id] = {"status": "under progress"}
 
@@ -298,10 +298,17 @@ async def analyze(command):
 
 
 
-# Trusted IPs
+
 trusted_ips = ["192.168.45.57", "163.70.139.60"]
 
 # Global list to store detected SSH connections
+# Mar 23 14:33:15 server sshd[12347]: Failed password for root from 203.0.113.45 port 37219 ssh2
+# ["Mar 23 14:33:15 server sshd[12347]: Failed password for root", "203.0.113.45 port 37219 ssh2"]
+# 203.0.113.45
+# sudo tail -n 20 /var/log/auth.log
+
+
+
 ssh_connections = deque(maxlen=100)
 ssh_connections_lock = threading.Lock()
 
@@ -347,17 +354,13 @@ def detect_ssh_traffic(packet):
         print(f"SSH connection detected from {src_ip} to {dst_ip}")
 
 def start_ssh_monitoring():
-    # Get the list of available interfaces
     available_interfaces = get_if_list()
     if not available_interfaces:
         print("No network interfaces found!")
         return
 
-    # Use the first available interface
     interface = available_interfaces[0]
     print(f"Starting SSH traffic monitoring on interface: {interface}")
-
-    # Start packet sniffing
     sniff(iface=interface, prn=detect_ssh_traffic, filter="tcp port 22", count=0)
 
 # Start SSH monitoring in a separate thread
@@ -384,7 +387,6 @@ async def get_ssh_connections():
 
 MEMORY_LIME_PATH = "/home/mritunjay/memins/volatility3/memory.lime"
 
-# Path to combined YARA rules
 YARA_RULES_PATH = "/home/mritunjay/rules/combined_rules.yar"
 
 
